@@ -41,6 +41,15 @@ const Form = () => {
       return;
     }
 
+    // Text Only Validation (for full name, city, state, country)
+    if (
+      ["full_name", "city", "state", "country"].includes(name) &&
+      /\d/.test(value)
+    ) {
+      alert(`${name.replace("_", " ")} should not contain numbers.`);
+      return;
+    }
+
     setFormData((prevData) => ({ ...prevData, [name]: value || "" }));
   };
 
@@ -132,38 +141,6 @@ const Form = () => {
         {renderInputField("Zip Code", "zip_code")}
         {renderInputField("Email", "email", "email")}
         {renderInputField("Phone Number", "phone_number")}
-
-        {/* Hidden Institution Details */}
-        <input
-          type="hidden"
-          name="institution_name"
-          value={formData.institution_name}
-        />
-        <input
-          type="hidden"
-          name="institution_city"
-          value={formData.institution_city}
-        />
-        <input
-          type="hidden"
-          name="institution_state"
-          value={formData.institution_state}
-        />
-        <input
-          type="hidden"
-          name="institution_country"
-          value={formData.institution_country}
-        />
-        <input
-          type="hidden"
-          name="institution_address"
-          value={formData.institution_address}
-        />
-        <input
-          type="hidden"
-          name="institution_postal_code"
-          value={formData.institution_postal_code}
-        />
 
         <button type="submit" className="btn btn-warning w-100">
           Submit
